@@ -1,7 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { LOGGED_IN, LOGGED_OUT } from "../../Actions/UserActions";
+import { LOGGED_IN } from "../../Actions/UserActions";
 
 import axios from "axios";
 import { redirect } from "react-router-dom";

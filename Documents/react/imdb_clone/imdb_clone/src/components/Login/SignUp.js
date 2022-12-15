@@ -39,7 +39,7 @@ const SignUp = () => {
     setMessage(" ");
 
     fetchData();
-  }, [email, fetchData]);
+  }, [email]);
 
   const signUp = async (e) => {
     try {

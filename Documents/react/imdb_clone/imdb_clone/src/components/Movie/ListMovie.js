@@ -1,9 +1,12 @@
 import "./ListMovie.css";
+import axios from 'axios';
 import Movies from "../BootstrapData/index";
+import { useEffect } from "react";
 import { BsFillStarFill, BsStar, BsBookmarkStar } from "react-icons/bs";
+import {useSelector} from 'react-redux';
 
 function ListMovie() {
-
+  const user = useSelector(state => state.auth.user);
   useEffect(() => {
     const getMovie = async () => {
       if (user) {
