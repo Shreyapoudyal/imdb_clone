@@ -1,0 +1,48 @@
+.imdb-header{
+    text-align: center;
+    overflow: auto;
+}
+#logo{
+    float: left;
+    width: 33%;
+
+}
+#title{
+    float: left;
+    width: 30%;
+    font-size:xx-large;
+    color: white;
+    margin: 15px;
+    font-weight: bolder;
+    
+}
+
+#button{
+    float: right;
+    width: 30%;
+    height: 70%;
+    
+}
+
+#imdb-logo{
+    margin: 10px;
+    height: 40px;
+    float: left;
+    /* width: 15%; */
+}
+
+.header-buttons{
+    margin: 10px;
+    float: right;
+    padding: 12px;
+    font-weight: bolder;
+    border-radius: 6px;
+    height: 45px;
+    background-color: black;
+    color: white;
+}
+
+input[type=button]:hover {
+    background-color: rgb(48, 46, 46);
+    cursor: pointer;
+}

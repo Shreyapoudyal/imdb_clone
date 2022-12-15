@@ -1,0 +1,55 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    /* height: 70vh; */
+    margin-top: 2%;
+}
+
+.loginformContent {
+    width: 450px;
+    height:100%;
+    margin-left: 25%;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    margin-top: -2%;
+}
+
+.loginformContent {
+    padding-left: 12%;
+    padding-right: 12%;
+}
+
+.Auth-form-title {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 24px;
+    /* font-weight: 100; */
+        text-decoration: underline;
+
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.form-group{
+    margin-top: 10%;
+}
+
+.btn-login{
+    color: aliceblue;
+    background: #000;
+    border-color: white;
+    border-radius: 25px;
+}
+
+
+

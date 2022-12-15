@@ -1,0 +1,45 @@
+.details-container{
+    align-items: center;
+    display: flex;
+    width: 98vw;
+    /* height: 100vh; */
+    margin-right: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.movie-details{
+    width: 75vw;
+    /* height: 750px; */
+    margin-left: 13%;
+    padding-bottom: 20px;
+    background-color: black;
+    color: white;
+    margin-top: 2%;   
+}
+
+.title{
+    text-align: center;
+        margin-bottom: 1em;
+        font-size: 24px;
+        font-weight: 800;
+}
+
+.img-display{
+    width: 390px;
+}
+.movie-title{
+    width: 500px;
+}
+.movie-rank{
+    width: 200px;
+}
+.release-year{
+    width: 200px;
+}
+.movie-numberOfRatings{
+    width: 200px;
+}
+/* 
+td{
+        height: 390px; 
+} */

@@ -1,0 +1,10 @@
+.carousel{
+   width: 75%;
+   height: 55%;
+   margin-left: 12%;
+}
+.carouselItem{
+    display: block;
+    width: 70%;
+    margin-left: 15%;
+}
