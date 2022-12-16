@@ -8,7 +8,9 @@ export const authReducer = (state = {}, action) => {
     case "LOGIN_SUCCESS":
       return {
         loginloader: false,
-        user: action.payload,
+        user: action.payload.data,
+        token: action.payload.token,
+        role: action.payload.role,
       };
 
     case "LOGIN_FAILED":

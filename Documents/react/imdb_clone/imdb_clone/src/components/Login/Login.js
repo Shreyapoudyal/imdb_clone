@@ -10,6 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  console.log("authstate", authState);
   const navigate = useNavigate();
   if (authState.user && authState.token) {
     navigate("/listmovie");
@@ -50,10 +51,11 @@ export default function Login() {
             id="submitButton"
             type="button"
             value="Login"
-            onClick={dispatch(LOGIN_API_CALL(email, password))}
+            onClick={(e) => dispatch(LOGIN_API_CALL(email, password))}
           />
         </div>
-        <div>{dispatch(LOGIN_FAILED)}</div>
+        {authState.error || ""}
+        {authState.message || ""}
       </div>
     </form>
   );

@@ -6,10 +6,14 @@ export const LOGIN_INIT = () => {
   };
 };
 
-export const LOGIN_SUCCESS = (data) => {
+export const LOGIN_SUCCESS = (data, role, token) => {
   return {
     type: "LOGIN_SUCCESS",
-    payload: data,
+    payload: {
+      data,
+    role,
+    token
+    }
   };
 };
 
@@ -34,11 +38,12 @@ export const LOGIN_API_CALL = (email, password) => {
         );
         console.log(res);
         if (res.data.success) {
-          dispatch(LOGIN_SUCCESS(res.data));
+          dispatch(LOGIN_SUCCESS(res.data.user, res.data.token, "user"));
           localStorage.setItem("token", res.data.token);
           console.log(localStorage.getItem("token"));
           localStorage.setItem("role", "user");
-          
+        } else {
+          dispatch(LOGIN_FAILED(res.data.message));
         }
       } else {
         dispatch(LOGIN_FAILED("Email and Password are Required"));
