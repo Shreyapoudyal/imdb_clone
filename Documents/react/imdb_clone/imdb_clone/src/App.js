@@ -13,7 +13,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing/Landing";
 import UpdateMovie from "./components/Movie/UpdateMovie";
 
-
 import { Provider } from "react-redux";
 // import { legacy_createStore as createStore } from "redux";
 
@@ -21,18 +20,16 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 // import userReducer from "./Reducers/UserReducer";
 import { authReducer } from "./Reducers/AuthReducer";
 // import userReducer from "./Reducers/UserReducer";
+import { signReducer } from "./Reducers/SignupReducer";
 
 const store = configureStore({
   reducer: combineReducers({
     auth: authReducer,
+    sign: signReducer,
   }),
 });
 
-
-
 function App() {
-
-  
   // static getDerivedStateFromProps(props, state) {
   //   if (props.isLoggedIn) {
   //     return {

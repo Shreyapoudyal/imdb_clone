@@ -2,15 +2,20 @@ import { useState, useEffect } from "react";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 // import "./signup.css";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { SIGNUP_API_CALL, SIGNUP_FAILED } from "../../Actions/SignupActions";
 
 const SignUp = () => {
+  const signState = useSelector((state) => state.sign);
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [valid, setValid] = useState(false);
   const [message, setMessage] = useState(" ");
+
+  console.log("signstate", signState);
 
   const fetchData = async () => {
     try {
@@ -41,38 +46,38 @@ const SignUp = () => {
     fetchData();
   }, [email]);
 
-  const signUp = async (e) => {
-    try {
-      setError(" ");
-      if (email && password && firstName && lastName) {
-        const res = await axios.post(
-          "http://localhost:2323/api/v1/user/signup",
-          {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-          }
-        );
-        console.log(res);
-        if (res.data.success) {
-          setError(res.data.message);
-        } else {
-          setError(res.data.message);
-        }
-      } else {
-        setError("All Fields are Required");
-      }
-    } catch (ex) {
-      if (ex.response) {
-        if (ex.response.data) {
-          if (!ex.response.data.success) {
-            setError(ex.response.data.message);
-          }
-        }
-      }
-    }
-  };
+  // const signUp = async (e) => {
+  //   try {
+  //     setError(" ");
+  //     if (email && password && firstName && lastName) {
+  //       const res = await axios.post(
+  //         "http://localhost:2323/api/v1/user/signup",
+  //         {
+  //           firstName: firstName,
+  //           lastName: lastName,
+  //           email: email,
+  //           password: password,
+  //         }
+  //       );
+  //       console.log(res);
+  //       if (res.data.success) {
+  //         setError(res.data.message);
+  //       } else {
+  //         setError(res.data.message);
+  //       }
+  //     } else {
+  //       setError("All Fields are Required");
+  //     }
+  //   } catch (ex) {
+  //     if (ex.response) {
+  //       if (ex.response.data) {
+  //         if (!ex.response.data.success) {
+  //           setError(ex.response.data.message);
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
 
   return (
     <div className="Auth-form-container">
@@ -157,12 +162,15 @@ const SignUp = () => {
           <div className="form-group-signin d-grid gap-2">
             <input
               type="button"
-              className="btn btn-outline-warning"
+              // className="btn btn-outline-warning"
               value="Signup"
               name="signup"
-              onClick={signUp}
+              onClick={(e) =>
+                dispatch(SIGNUP_API_CALL(email, password, firstName, lastName))
+              }
             />
-            {error}
+            {signState.error || ""}
+            {signState.message || ""}
           </div>
         </div>
       </form>

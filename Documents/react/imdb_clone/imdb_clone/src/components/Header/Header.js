@@ -5,7 +5,6 @@ function Header(props) {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    window.location.reload();
     // isLoggedIn(false);
   };
 
@@ -22,9 +21,8 @@ function Header(props) {
               />
             </div>
           </Link>
-
-          <div id="title">IMDb Clone</div>
-
+            <div id="title">IMDb Clone</div>
+            
           <div id="button">
             <Link to="/user/signup">
               <input

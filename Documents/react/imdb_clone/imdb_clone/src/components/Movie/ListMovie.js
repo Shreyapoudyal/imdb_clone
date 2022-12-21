@@ -1,12 +1,12 @@
 import "./ListMovie.css";
-import axios from 'axios';
+import axios from "axios";
 import Movies from "../BootstrapData/index";
 import { useEffect } from "react";
 import { BsFillStarFill, BsStar, BsBookmarkStar } from "react-icons/bs";
-import {useSelector} from 'react-redux';
+import { useSelector } from "react-redux";
 
 function ListMovie() {
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     const getMovie = async () => {
       if (user) {
@@ -24,7 +24,7 @@ function ListMovie() {
     };
     getMovie();
   }, [user]);
-  
+
   console.log(Movies);
   const movie = Movies.movies.list;
   console.log(movie);
@@ -32,7 +32,7 @@ function ListMovie() {
     <div>
       <div className="main-container">
         <div className="movie-list">
-          <h3 className="title">Movie Charts</h3>
+          <h3 className="title">Top Rated Movies 2022</h3>
           <table class="table table-striped table-dark">
             <thead>
               <tr>
@@ -56,7 +56,7 @@ function ListMovie() {
                 return (
                   <tr key={i}>
                     <th scope="row">
-  <img src={movie.posterUrl} alt="poster" />
+                      <img src={movie.posterUrl} alt="poster" />
                     </th>
                     <td>
                       {movie.name} ({movie.year})
