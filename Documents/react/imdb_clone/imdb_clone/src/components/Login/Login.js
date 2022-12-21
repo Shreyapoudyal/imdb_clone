@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Login.css";
 import { useSelector, useDispatch } from "react-redux";
 import { LOGIN_API_CALL, LOGIN_FAILED } from "../../Actions/AuthActions";
@@ -12,9 +12,13 @@ export default function Login() {
 
   console.log("authstate", authState);
   const navigate = useNavigate();
-  if (authState.user && authState.token) {
-    navigate("/listmovie");
-  }
+
+  useEffect(() => {
+    if (authState.user && authState.token) {
+      navigate("/moviecards");
+    }
+  }, [authState]);
+
   return (
     <form className="login">
       <div className="loginformContent">

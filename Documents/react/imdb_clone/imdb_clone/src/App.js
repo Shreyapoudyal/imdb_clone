@@ -21,6 +21,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { authReducer } from "./Reducers/AuthReducer";
 // import userReducer from "./Reducers/UserReducer";
 import { signReducer } from "./Reducers/SignupReducer";
+import MovieCards from "./components/Movie/MovieCards";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -97,6 +98,7 @@ function App() {
               <Route index element={<Landing />} />
 
               <Route path="/listmovie" element={<ListMovie />} />
+              <Route path="/moviecards" element={<MovieCards />} />
 
               <Route path="/moviedetails/:name" element={<MovieDetails />} />
 

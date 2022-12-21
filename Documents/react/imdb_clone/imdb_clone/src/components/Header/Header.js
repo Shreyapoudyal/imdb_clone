@@ -17,12 +17,12 @@ function Header(props) {
               <img
                 id="imdb-logo"
                 src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"
-                alt="IMDB LOGO"
+                alt="IMDb LOGO"
               />
             </div>
           </Link>
-            <div id="title">IMDb Clone</div>
-            
+          <div id="title">IMDb Clone</div>
+
           <div id="button">
             <Link to="/user/signup">
               <input
@@ -57,7 +57,7 @@ function Header(props) {
             </div>
           </Link>
 
-          <div id="title">IMDB Clone</div>
+          <div id="title">IMDb Clone</div>
           <div id="button">
             <Link to="/user/login">
               <input

@@ -2,6 +2,7 @@ import React from "react";
 import "./Landing.css";
 import Content from "./Content";
 import MovieCarousel from "../Carousel/MovieCarousel";
+import MovieCards from "../Movie/MovieCards";
 
 const Landing = ({ isLoggedIn }) => {
   const contents = [
@@ -19,9 +20,10 @@ const Landing = ({ isLoggedIn }) => {
         <div className="main-container">
           <MovieCarousel />
           <div id="sub-container">
-            {contents.map((cont) => {
+            {/* {contents.map((cont) => {
               return <Content content={cont} />;
-            })}
+            })} */}
+            <MovieCards />
           </div>
         </div>
       )}
