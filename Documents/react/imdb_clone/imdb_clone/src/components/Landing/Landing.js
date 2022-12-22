@@ -23,7 +23,6 @@ const Landing = ({ isLoggedIn }) => {
             {/* {contents.map((cont) => {
               return <Content content={cont} />;
             })} */}
-            <MovieCards />
           </div>
         </div>
       )}

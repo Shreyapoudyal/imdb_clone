@@ -98,9 +98,9 @@ function App() {
               <Route index element={<Landing />} />
 
               <Route path="/listmovie" element={<ListMovie />} />
-              <Route path="/moviecards" element={<MovieCards />} />
-
               <Route path="/moviedetails/:name" element={<MovieDetails />} />
+
+              <Route path="/admin/moviecards" element={<MovieCards />} />
 
               <Route path="/admin/addmovie" element={<AddMovie />} />
 

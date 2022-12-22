@@ -15,7 +15,7 @@ export default function Login() {
 
   useEffect(() => {
     if (authState.user && authState.token) {
-      navigate("/moviecards");
+      navigate("/listmovie");
     }
   }, [authState]);
 

@@ -33,7 +33,7 @@ export default function AdminLogin() {
           localStorage.setItem("token", res.data.token);
           console.log(localStorage.getItem("token"));
           localStorage.setItem("role", "admin");
-          redirect("/admin/addmovie");
+          window.location.replace("/admin/moviecards");
           // window.location.replace("/admin/addmovie");
         } else {
           setError(res.data.message);

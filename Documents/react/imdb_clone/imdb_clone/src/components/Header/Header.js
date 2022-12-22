@@ -1,11 +1,17 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { LOGIN_INIT, LOGIN_FAILED } from "../../Actions/AuthActions";
 
 function Header(props) {
+
+  const authState = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    // isLoggedIn(false);
+          dispatch(LOGIN_INIT());
+
   };
 
   return (
@@ -39,6 +45,28 @@ function Header(props) {
                 type="button"
                 name="login"
                 value="Login"
+                className="header-buttons "
+                onClick={props.onLoginClick}
+              />
+            </Link>
+          </div>
+
+          <div id="button">
+            <Link to="/admin/signup">
+              <input
+                type="button"
+                name="signup"
+                value="Admin Signup"
+                onClick={props.onSignupClick}
+                className="header-buttons"
+              />
+            </Link>
+            <Link to="/admin/login">
+              {" "}
+              <input
+                type="button"
+                name="login"
+                value="Admin Login"
                 className="header-buttons "
                 onClick={props.onLoginClick}
               />
