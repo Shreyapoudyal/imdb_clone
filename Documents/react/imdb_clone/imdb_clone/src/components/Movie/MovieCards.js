@@ -5,6 +5,11 @@ import MoviePoster from "./MoviePoster";
 // import necessary libraries for making HTTP requests
 import axios from "axios";
 
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import AddMovie from "./AddMovie";
+import { Rating } from "react-simple-star-rating";
+
 const token = localStorage.getItem("token");
 
 class MovieCards extends React.Component {
@@ -12,8 +17,6 @@ class MovieCards extends React.Component {
     movies: [], // array to store movie data
     error: null, // variable to store any errors that may occur
   };
-
-  
 
   componentDidMount() {
     axios
@@ -28,22 +31,6 @@ class MovieCards extends React.Component {
       .catch((err) => {
         this.setState({ error: err });
       });
-
-    // axios
-    //   .get(
-    //     `http://localhost:2323/api/v1/upload/${this.state.movies.id}/base64`,
-    //     {
-    //       headers: {
-    //         authorization: `bearer ${token}`,
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     this.setState({ movies: [...this.state.movies, ...res.data.movie] });
-    //   })
-    //   .catch((err) => {
-    //     this.setState({ error: err });
-    //   });
   }
 
   render() {
@@ -65,12 +52,24 @@ class MovieCards extends React.Component {
       <div>
         {movies.map((movie) => (
           <div key={movie.id}>
-            <h2>{movie.name}</h2>
-            <p>{movie.year}</p>
-            {console.log("poster", this.state.movies[0].poster)}
-            <MoviePoster poster = {this.state.movies[0].poster}/>
+            <Card style={{ width: "18rem" }}>
+              {/* <Card.Img variant="top" src="holder.js/100px180" */}
+              <MoviePoster poster={movie.poster} />
+              {/* /> */}
+              <Card.Body>
+                <Card.Title>{movie.name}</Card.Title>
+                <Card.Text>{movie.year}</Card.Text>
+                <Card.Text>{movie.genre}</Card.Text>
+                <Card.Text>{movie.tags}</Card.Text>
+                <Button variant="primary">Update</Button>
+              </Card.Body>
+            </Card>
+            {console.log("poster", movie.poster)}
           </div>
         ))}
+        {/* <Rating /> */}
+
+        <AddMovie />
       </div>
     );
   }
