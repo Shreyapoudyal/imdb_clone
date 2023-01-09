@@ -1,0 +1,12 @@
+.giveRating {
+    margin-left: 30px;
+    font-size: x-large;
+}
+.giveRating :hover {
+    opacity: 0.3;
+    pointer-events: painted;
+    cursor: pointer;
+}
+.modal-backdrop {
+    background: black;
+}

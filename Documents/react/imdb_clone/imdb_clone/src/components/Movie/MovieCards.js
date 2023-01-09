@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import MoviePoster from "./MoviePoster";
 import { useNavigate } from "react-router-dom";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import axios from "axios";
 
@@ -11,6 +13,8 @@ import AddMovie from "./AddMovie";
 import UpdateMovie from "./UpdateMovie";
 import { useDispatch } from "react-redux";
 import { deleteMovie } from "../../Actions/MovieCrudActions";
+import YourRating from "./Rating";
+import MoviesRatingAvgAPI from "./MoviesRatingAvgAPI";
 
 const token = localStorage.getItem("token");
 
@@ -22,9 +26,13 @@ function MovieCards() {
   const [poster, setPoster] = useState();
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+  const [ratingAvg, setRatingAvg] = useState(0);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  //  const id = e.target.value;
+  //  console.log("id", id);
 
   //GET all API (movie)
   useEffect(() => {
@@ -42,6 +50,10 @@ function MovieCards() {
         setError(err);
       });
   }, []);
+
+  // const AddMovie = (e) => {
+  //   navigate("/admin/addmovie");
+  // };
 
   const UpdateMovie = (e) => {
     const id = e.target.value;
@@ -62,32 +74,49 @@ function MovieCards() {
   return (
     <div>
       {console.log("from movie cards")}
-      {movies.map((movie) => (
-        <div key={movie.id}>
-          <Card style={{ width: "18rem" }}>
-            <MoviePoster poster={movie.poster} />
-            <Card.Body>
-              <Card.Title>{movie.name}</Card.Title>
-              <Card.Text>{movie.year}</Card.Text>
-              <Card.Text>{movie.genre}</Card.Text>
-              <Card.Text>{movie.tags}</Card.Text>
-              <Button value={movie.id} variant="primary" onClick={UpdateMovie}>
-                Update
-              </Button>
-              <Button
-                value={movie.id}
-                variant="danger"
-                onClick={() => dispatch(deleteMovie(movie.id))}
-              >
-                Delete
-              </Button>
-            </Card.Body>
-          </Card>
-          {console.log("poster", movie.poster)}
-        </div>
-      ))}
-      {/* <Rating /> */}
-      {/* <MovieRating /> */}
+      {/* <Button variant="primary" onClick={AddMovie}>
+        Add Movie
+      </Button> */}
+      <Row>
+        {movies.map((movie) => (
+          <Col>
+            <div key={movie.id}>
+              <Card className="m-4" style={{ width: "18rem" }}>
+                <MoviePoster poster={movie.poster} />
+                <Card.Body>
+                  <Card.Title>{movie.name}</Card.Title>
+                  <Card.Text>{movie.year}</Card.Text>
+                  <Card.Text>{movie.genre}</Card.Text>
+                  <Card.Text>{movie.tags}</Card.Text>
+                  <center>
+                    <MoviesRatingAvgAPI id={movie.id} />
+                    <YourRating {...movie} />{" "}
+                  </center>
+                  <Button
+                    value={movie.id}
+                    variant="primary"
+                    onClick={UpdateMovie}
+                  >
+                    Update
+                  </Button>{" "}
+                  <Button
+                    value={movie.id}
+                    variant="danger"
+                    onClick={() => {
+                      dispatch(deleteMovie(movie.id));
+                      window.location.reload();
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </Card.Body>
+              </Card>
+
+              {console.log("poster", movie.poster)}
+            </div>
+          </Col>
+        ))}
+      </Row>
       <AddMovie />
     </div>
   );

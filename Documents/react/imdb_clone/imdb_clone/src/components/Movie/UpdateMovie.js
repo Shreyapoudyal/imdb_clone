@@ -1,7 +1,7 @@
 import "./AddMovie.css";
 import { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { updateMovie } from "../../Actions/MovieCrudActions";
 import { useDispatch } from "react-redux";
@@ -193,9 +193,10 @@ function UpdateMovie(props) {
               className="btn-addMovie"
               value="Update Movie"
               name="updateMovie"
-              onClick={dispatch(
-                updateMovie({ name, year, genre, tags, poster }, id)
-              )}
+              onClick={() => {
+                dispatch(updateMovie({ name, year, genre, tags, poster }, id));
+                
+              }}
             />
 
             {error}

@@ -30,7 +30,7 @@ const MoviePoster = (props) => {
     getPoster();
   }, [poster, setPosterUrl]);
 
-  return <img src={posterUrl} alt="Movie Poster" />;
+  return <img height="220px" src={posterUrl} alt="Movie Poster" />;
 };
 
 export default MoviePoster;

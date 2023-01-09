@@ -104,6 +104,7 @@ function App() {
               <Route path="/moviedetails/:name" element={<MovieDetails />} />
 
               <Route path="/admin/moviecards" element={<MovieCards />} />
+              <Route path="/user/moviecards" element={<MovieCards />} />
 
               <Route path="/admin/addmovie" element={<AddMovie />} />
 

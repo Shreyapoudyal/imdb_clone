@@ -2,8 +2,9 @@ import "./AddMovie.css";
 import { useState } from "react";
 import axios from "axios";
 
-import { useSelector, useDispatch } from "react-redux";
-import { LOGIN_API_CALL, LOGIN_FAILED } from "../../Actions/AuthActions";
+import { useDispatch } from "react-redux";
+import { addMovie } from "../../Actions/MovieCrudActions";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function AddMovie() {
   const token = localStorage.getItem("token");
@@ -17,6 +18,8 @@ function AddMovie() {
 
   // const AddMovieState = useSelector((state) => state.AddMovieState);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const uploadFile = async (e) => {
     try {
       console.log("upload api called");
@@ -180,7 +183,9 @@ function AddMovie() {
               className="btn-addMovie"
               value="Add Movie"
               name="addMovie"
-              onClick={addMovie}
+              onClick={() =>
+                dispatch(addMovie({ name, year, genre, tags, poster }))
+              }
             />
 
             {error}

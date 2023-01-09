@@ -1,4 +1,4 @@
-import "./YourRating.css";
+import "./Rating.css";
 import { BsStar } from "react-icons/bs";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";

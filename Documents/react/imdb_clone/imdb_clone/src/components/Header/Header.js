@@ -4,14 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { LOGIN_INIT, LOGIN_FAILED } from "../../Actions/AuthActions";
 
 function Header(props) {
-
   const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-          dispatch(LOGIN_INIT());
-
+    dispatch(LOGIN_INIT());
   };
 
   return (
@@ -34,7 +32,7 @@ function Header(props) {
               <input
                 type="button"
                 name="signup"
-                value="Signup"
+                value="User Signup"
                 onClick={props.onSignupClick}
                 className="header-buttons"
               />
@@ -44,7 +42,7 @@ function Header(props) {
               <input
                 type="button"
                 name="login"
-                value="Login"
+                value="User Login"
                 className="header-buttons "
                 onClick={props.onLoginClick}
               />
