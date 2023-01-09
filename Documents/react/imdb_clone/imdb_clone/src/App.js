@@ -22,13 +22,13 @@ import { authReducer } from "./Reducers/AuthReducer";
 // import userReducer from "./Reducers/UserReducer";
 import { signReducer } from "./Reducers/SignupReducer";
 import MovieCards from "./components/Movie/MovieCards";
-import AddMovieReducer  from "./Reducers/AddMovieReducer";
+import movieCrudReducer from "./Reducers/MovieCrudReducer";
 
 const store = configureStore({
   reducer: combineReducers({
     auth: authReducer,
     sign: signReducer,
-    AddMovieState: AddMovieReducer,
+    movie: movieCrudReducer,
   }),
 });
 

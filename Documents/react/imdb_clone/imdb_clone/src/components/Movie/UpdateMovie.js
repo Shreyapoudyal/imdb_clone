@@ -3,8 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { LOGIN_API_CALL, LOGIN_FAILED } from "../../Actions/AuthActions";
+import { updateMovie } from "../../Actions/MovieCrudActions";
+import { useDispatch } from "react-redux";
 
 function UpdateMovie(props) {
   const token = localStorage.getItem("token");
@@ -17,6 +17,7 @@ function UpdateMovie(props) {
   const [poster, setPoster] = useState();
 
   // const AddMovieState = useSelector((state) => state.AddMovieState);
+  const dispatch = useDispatch();
 
   let params = useParams();
   console.log(params);
@@ -67,47 +68,47 @@ function UpdateMovie(props) {
   };
 
   // Update API (movie)
-  const updateMovie = async (e) => {
-    if (e) {
-      try {
-        setError("");
-        if (name && year && genre && tags && poster) {
-          const res = await axios.put(
-            `http://localhost:2323/api/v1/movie/${id}`,
-            {
-              name: name,
-              year: year,
-              poster: poster,
-              genre: genre,
-              tags: tags,
-            },
-            {
-              headers: {
-                authorization: `bearer ${token}`,
-              },
-            }
-          );
-          console.log("from updateMovie", res);
-          if (res.data.success) {
-            setError(res.data.message);
-          } else {
-            setError(res.data.message);
-          }
-        } else {
-          setError("All Fields are Required");
-        }
-      } catch (error) {
-        console.log(error);
-        if (error) {
-          if (error.response) {
-            if (!error.response.data.success) {
-              setError(error.response.data.message);
-            }
-          }
-        }
-      }
-    }
-  };
+  // const updateMovie = async (e) => {
+  //   if (e) {
+  //     try {
+  //       setError("");
+  //       if (name && year && genre && tags && poster) {
+  //         const res = await axios.put(
+  //           `http://localhost:2323/api/v1/movie/${id}`,
+  //           {
+  //             name: name,
+  //             year: year,
+  //             poster: poster,
+  //             genre: genre,
+  //             tags: tags,
+  //           },
+  //           {
+  //             headers: {
+  //               authorization: `bearer ${token}`,
+  //             },
+  //           }
+  //         );
+  //         console.log("from updateMovie", res);
+  //         if (res.data.success) {
+  //           setError(res.data.message);
+  //         } else {
+  //           setError(res.data.message);
+  //         }
+  //       } else {
+  //         setError("All Fields are Required");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       if (error) {
+  //         if (error.response) {
+  //           if (!error.response.data.success) {
+  //             setError(error.response.data.message);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
 
   return (
     <div className="Auth-form-container">
@@ -192,7 +193,9 @@ function UpdateMovie(props) {
               className="btn-addMovie"
               value="Update Movie"
               name="updateMovie"
-              onClick={updateMovie}
+              onClick={dispatch(
+                updateMovie({ name, year, genre, tags, poster }, id)
+              )}
             />
 
             {error}
