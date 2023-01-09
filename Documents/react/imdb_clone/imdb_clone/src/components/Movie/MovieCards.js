@@ -9,6 +9,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import AddMovie from "./AddMovie";
 import UpdateMovie from "./UpdateMovie";
+import { useDispatch } from "react-redux";
+import { deleteMovie } from "../../Actions/MovieCrudActions";
 
 const token = localStorage.getItem("token");
 
@@ -22,6 +24,7 @@ function MovieCards() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //GET all API (movie)
   useEffect(() => {
@@ -70,6 +73,13 @@ function MovieCards() {
               <Card.Text>{movie.tags}</Card.Text>
               <Button value={movie.id} variant="primary" onClick={UpdateMovie}>
                 Update
+              </Button>
+              <Button
+                value={movie.id}
+                variant="danger"
+                onClick={() => dispatch(deleteMovie(movie.id))}
+              >
+                Delete
               </Button>
             </Card.Body>
           </Card>
