@@ -1,54 +1,77 @@
-// import React, { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import axios from "axios";
+import "./YourRating.css";
+import { BsStar } from "react-icons/bs";
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { Rating } from "react-simple-star-rating";
+import axios from "axios";
 
-// function MovieRating({ movieId }) {
-//   const dispatch = useDispatch();
-//   const rating = useSelector((state) => state.movies[movieId].rating);
+const YourRating = (props) => {
+  const [show, setShow] = useState(false);
+  const [rating, setRating] = useState(0);
+  const { id, name } = props;
 
-//   useEffect(() => {
-//     // Fetch the current rating for the movie from the API
-//     axios.get(`/api/movies/${movieId}/rating`).then((response) => {
-//       dispatch({
-//         type: "SET_MOVIE_RATING",
-//         payload: {
-//           movieId: movieId,
-//           rating: response.data.rating,
-//         },
-//       });
-//     });
-//   }, []);
+  // Catch Rating value
+  const handleRating = () => {
+    console.log("Rating is ", rating);
+  };
 
-//   const handleRatingSubmit = (event) => {
-//     event.preventDefault();
-//     const formData = new FormData(event.target);
-//     const rating = formData.get("rating");
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const onPointerMove = (value, index) => setRating(value);
 
-//     // Submit the new rating for the movie to the API
-//     axios
-//       .post(`/api/movies/${movieId}/rating`, {
-//         rating: rating,
-//       })
-//       .then((response) => {
-//         dispatch({
-//           type: "SET_MOVIE_RATING",
-//           payload: {
-//             movieId: movieId,
-//             rating: response.data.rating,
-//           },
-//         });
-//       });
-//   };
+  const rate = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:2323/api/v1/rating",
+        {
+          movieId: id,
+          star: rating,
+        },
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res) {
+        console.log(res);
+        handleClose();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return (
+    <>
+      <div className="giveRating" onClick={handleShow}>
+        <BsStar fontSize="18px" />
+      </div>
 
-//   return (
-//     <form onSubmit={handleRatingSubmit}>
-//       <label>
-//         Rating:
-//         <input type="number" name="rating" min="0" max="10" />
-//       </label>
-//       <button type="submit">Submit</button>
-//     </form>
-//   );
-// }
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Rate The Movie</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h3>{name}</h3>
+          {/* <StarRating /> */}
+          <Rating
+            onClick={handleRating}
+            onPointerMove={onPointerMove}
+            iconsCount={10}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={rate}>
+            Rate
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 
-// export default MovieRating;
+export default YourRating;

@@ -1,105 +1,117 @@
-export const FETCH_MOVIES_REQUEST = "FETCH_MOVIES_REQUEST";
-export const FETCH_MOVIES_SUCCESS = "FETCH_MOVIES_SUCCESS";
-export const FETCH_MOVIES_ERROR = "FETCH_MOVIES_ERROR";
-export const ADD_MOVIE_REQUEST = "ADD_MOVIE_REQUEST";
-export const ADD_MOVIE_SUCCESS = "ADD_MOVIE_SUCCESS";
-export const ADD_MOVIE_ERROR = "ADD_MOVIE_ERROR";
-export const UPDATE_MOVIE_REQUEST = "UPDATE_MOVIE_REQUEST";
-export const UPDATE_MOVIE_SUCCESS = "UPDATE_MOVIE_SUCCESS";
-export const UPDATE_MOVIE_ERROR = "UPDATE_MOVIE_ERROR";
-export const DELETE_MOVIE_REQUEST = "DELETE_MOVIE_REQUEST";
-export const DELETE_MOVIE_SUCCESS = "DELETE_MOVIE_SUCCESS";
-export const DELETE_MOVIE_ERROR = "DELETE_MOVIE_ERROR";
+// import axios from "axios";
+// import { fetchMovies } from "./fetchMovieActions";
+// import { setLoaded, setLoading } from "./loadingActions";
 
-// import { API_BASE_URL } from '../config';
-// import { normalizeResponseErrors } from './utils';
-// import {
-//   FETCH_MOVIES_REQUEST,
-//   FETCH_MOVIES_SUCCESS,
-//   FETCH_MOVIES_ERROR,
-//   ADD_MOVIE_REQUEST,
-//   ADD_MOVIE_SUCCESS,
-//   ADD_MOVIE_ERROR,
-//   UPDATE_MOVIE_REQUEST,
-//   UPDATE_MOVIE_SUCCESS,
-//   UPDATE_MOVIE_ERROR,
-//   DELETE_MOVIE_REQUEST,
-//   DELETE_MOVIE_SUCCESS,
-//   DELETE_MOVIE_ERROR
-// } from './actionTypes';
+// export const ADD_MOVIE = "ADD_MOVIE";
+// export const UPDATE_MOVIE = "UPDATE_MOVIE";
+// export const DELETE_MOVIE = "DELETE_MOVIE";
 
-// export const fetchMovies = () => dispatch => {
-//   dispatch({
-//     type: FETCH_MOVIES_REQUEST
-//   });
+// export const ADD_MOVIE_PENDING = "ADD_MOVIE_PENDING";
+// export const ADD_MOVIE_SUCCESS = "ADD_MOVIE_SUCCESS";
+// export const ADD_MOVIE_FAILURE = "ADD_MOVIE_FAILURE";
 
-//   return fetch(`${API_BASE_URL}/movies`)
-//     .then(res => normalizeResponseErrors(res))
-//     .then(res => res.json())
-//     .then(data => dispatch({
-//       type: FETCH_MOVIES_SUCCESS,
-//       data
-//     }))
-//     .catch(err => dispatch({
-//       type: FETCH_MOVIES_ERROR,
-//       error: err
-//     }));
-// };
+// export const UPDATE_MOVIE_PENDING = "UPDATE_MOVIE_PENDING";
+// export const UPDATE_MOVIE_SUCCESS = "UPDATE_MOVIE_SUCCESS";
+// export const UPDATE_MOVIE_FAILURE = "UPDATE_MOVIE_FAILURE";
 
-// export const addMovie = movie => (dispatch, getState) => {
-//   dispatch({
-//     type: ADD_MOVIE_REQUEST
-//   });
+// export const DELETE_MOVIE_PENDING = "DELETE_MOVIE_PENDING";
+// export const DELETE_MOVIE_SUCCESS = "DELETE_MOVIE_SUCCESS";
+// export const DELETE_MOVIE_FAILURE = "DELETE_MOVIE_FAILURE";
 
-//   const authToken = getState().auth.authToken;
+// export function addMovie(movie) {
+//   return async (dispatch) => {
+//     dispatch({ type: ADD_MOVIE_PENDING });
+//     dispatch(setLoading());
+//     try {
+//       // Make API call to add movie
+//       const response = await axios.post(
+//         "http://localhost:2323/api/v1/movie",
+//         movie,
+//         {
+//           headers: {
+//             authorization: `bearer ${localStorage.getItem("token")}`,
+//           },
+//         }
+//       );
+//       dispatch({
+//         type: ADD_MOVIE_SUCCESS,
+//         movie: response.data.movie,
+//         message: response.data.message,
+//       });
+//       dispatch(setLoaded());
+//       dispatch(fetchMovies());
+//     } catch (error) {
+//       dispatch({
+//         type: ADD_MOVIE_FAILURE,
+//         error,
+//       });
+//       dispatch(setLoaded());
+//     }
+//   };
+// }
 
-//   return fetch(`${API_BASE_URL}/movies`, {
-//     method: 'POST',
-//     headers
+// export function updateMovie(movie, id) {
+//   return async (dispatch) => {
+//     dispatch({ type: UPDATE_MOVIE_PENDING });
+//     dispatch(setLoading());
+//     try {
+//       // Make API call to update movie
+//       const response = await axios.put(
+//         `http://localhost:2323/api/v1/movie/${id}`,
+//         movie,
+//         {
+//           headers: {
+//             authorization: `bearer ${localStorage.getItem("token")}`,
+//           },
+//         }
+//       );
+//       dispatch({
+//         type: UPDATE_MOVIE_SUCCESS,
+//         movie: response.data.movie,
+//         message: response.data.message,
+//         success: response.data.success,
+//       });
+//       dispatch(setLoaded());
+//       dispatch(fetchMovies());
+//     } catch (error) {
+//       dispatch({
+//         type: UPDATE_MOVIE_FAILURE,
+//         error,
+//       });
+//       dispatch(setLoaded());
+//     }
+//   };
+// }
 
-import { 
-  FETCH_MOVIES_REQUEST, 
-  FETCH_MOVIES_SUCCESS, 
-  FETCH_MOVIES_FAILURE, 
-  ADD_MOVIE_REQUEST, 
-  ADD_MOVIE_SUCCESS, 
-  ADD_MOVIE_FAILURE, 
-  UPDATE_MOVIE_REQUEST, 
-  UPDATE_MOVIE_SUCCESS, 
-  UPDATE_MOVIE_FAILURE, 
-  DELETE_MOVIE_REQUEST, 
-  DELETE_MOVIE_SUCCESS, 
-  DELETE_MOVIE_FAILURE 
-} from './actionTypes';
-
-import axios from 'axios';
-
-const apiUrl = 'http://localhost:3000/movies';
-
-export const fetchMovies = () => {
-  return (dispatch) => {
-    dispatch(fetchMoviesRequest());
-    axios.get(apiUrl)
-      .then(response => {
-        dispatch(fetchMoviesSuccess(response.data))
-      })
-      .catch(error => {
-        dispatch(fetchMoviesFailure(error.message))
-      });
-  }
-};
-
-export const fetchMoviesRequest = () => {
-  return {
-    type: FETCH_MOVIES_REQUEST
-  }
-};
-
-export const fetchMoviesSuccess = movies => {
-  return {
-    type: FETCH_MOVIES_SUCCESS,
-    payload: movies
-  }
-};
-
-// export const fetchMovies
+// export function deleteMovie(id) {
+//   return async (dispatch) => {
+//     dispatch({ type: DELETE_MOVIE_PENDING });
+//     dispatch(setLoading());
+//     try {
+//       // Make API call to delete movie
+//       const response = await axios.delete(
+//         `http://localhost:2323/api/v1/movie/${id}`,
+//         {
+//           headers: {
+//             authorization: `bearer ${localStorage.getItem("token")}`,
+//           },
+//         }
+//       );
+//       dispatch({
+//         type: DELETE_MOVIE_SUCCESS,
+//         success: response.data.success,
+//         message: response.data.message,
+//         movie: response.data.movie,
+//         id,
+//       });
+//       dispatch(setLoaded());
+//       dispatch(fetchMovies());
+//     } catch (error) {
+//       dispatch({
+//         type: DELETE_MOVIE_FAILURE,
+//         error,
+//       });
+//       dispatch(setLoaded());
+//     }
+//   };
+// }

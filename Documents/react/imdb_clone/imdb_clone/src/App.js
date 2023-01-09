@@ -74,6 +74,7 @@ function App() {
   // console.log(this.state.isLoggedIn);
   return (
     <div className="bg-black">
+      {/* {console.log("in app.js body")} */}
       {/* <Header
           isLoggedIn={this.state.isLoggedIn}
           onLoginClick={this.showLoginForm}

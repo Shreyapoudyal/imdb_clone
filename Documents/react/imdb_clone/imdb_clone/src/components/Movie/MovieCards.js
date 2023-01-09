@@ -3,15 +3,12 @@ import { useState, useEffect } from "react";
 import MoviePoster from "./MoviePoster";
 import { useNavigate } from "react-router-dom";
 
-// import necessary libraries for making HTTP requests
 import axios from "axios";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import AddMovie from "./AddMovie";
 import UpdateMovie from "./UpdateMovie";
-// import MovieRating from "./Rating";
-// import { Rating } from "react-simple-star-rating";
 
 const token = localStorage.getItem("token");
 
@@ -21,13 +18,14 @@ function MovieCards() {
   const [genre, setGenre] = useState("");
   const [tags, setTags] = useState("");
   const [poster, setPoster] = useState();
-  const [movies, setMovies] = useState("");
+  const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   //GET all API (movie)
   useEffect(() => {
+    console.log("fetching");
     axios
       .get("http://localhost:2323/api/v1/movie", {
         headers: {
@@ -40,7 +38,7 @@ function MovieCards() {
       .catch((err) => {
         setError(err);
       });
-  }, [movies]);
+  }, []);
 
   const UpdateMovie = (e) => {
     const id = e.target.value;
@@ -48,18 +46,19 @@ function MovieCards() {
     navigate(`/admin/updatemovie/${id}`);
   };
 
-  // console.log(movies);
+  // console.log("movies", movies);
 
   if (error) {
     return <p>There was an error loading the movies.</p>;
   }
 
-  if (!movies.length) {
-    return <p>Loading movies...</p>;
-  }
+  // if (!movies.length) {
+  //   return <p>Loading movies...</p>;
+  // }
 
   return (
     <div>
+      {console.log("from movie cards")}
       {movies.map((movie) => (
         <div key={movie.id}>
           <Card style={{ width: "18rem" }}>
