@@ -22,11 +22,13 @@ import { authReducer } from "./Reducers/AuthReducer";
 // import userReducer from "./Reducers/UserReducer";
 import { signReducer } from "./Reducers/SignupReducer";
 import MovieCards from "./components/Movie/MovieCards";
+import AddMovieReducer  from "./Reducers/AddMovieReducer";
 
 const store = configureStore({
   reducer: combineReducers({
     auth: authReducer,
     sign: signReducer,
+    AddMovieState: AddMovieReducer,
   }),
 });
 
@@ -104,7 +106,7 @@ function App() {
 
               <Route path="/admin/addmovie" element={<AddMovie />} />
 
-              <Route path="/admin/updatemovie" element={<UpdateMovie />} />
+              <Route path="/admin/updatemovie/:id" element={<UpdateMovie />} />
               <Route path="/user/login" element={<Login />} />
               <Route path="/user/signup" element={<SignUp />} />
               <Route path="/admin/login" element={<AdminLogin />} />

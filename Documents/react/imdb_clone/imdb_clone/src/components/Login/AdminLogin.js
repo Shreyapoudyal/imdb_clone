@@ -2,14 +2,15 @@ import "./Login.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { LOGGED_IN } from "../../Actions/UserActions";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import { redirect } from "react-router-dom";
 
 export default function AdminLogin() {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // const UserAction = useSelector((state) => state.UserAction);
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function AdminLogin() {
           localStorage.setItem("token", res.data.token);
           console.log(localStorage.getItem("token"));
           localStorage.setItem("role", "admin");
-          window.location.replace("/admin/moviecards");
+          navigate("/admin/moviecards");
           // window.location.replace("/admin/addmovie");
         } else {
           setError(res.data.message);

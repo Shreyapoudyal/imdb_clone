@@ -1,15 +1,11 @@
-// import data from "../BootstrapData";
 import "./AddMovie.css";
 import { useState } from "react";
 import axios from "axios";
-// import useCurrentAdmin from "../../Hooks/UseCurrentAdmin";
-// import { useSelector } from "react-redux";
+
+import { useSelector, useDispatch } from "react-redux";
+import { LOGIN_API_CALL, LOGIN_FAILED } from "../../Actions/AuthActions";
 
 function AddMovie() {
-  // const admin = useCurrentAdmin(
-  //   "http://localhost:2323/api/v1/admin/currentAdmin"
-  // );
-
   const token = localStorage.getItem("token");
 
   const [error, setError] = useState("");
@@ -19,19 +15,7 @@ function AddMovie() {
   const [tags, setTags] = useState("");
   const [poster, setPoster] = useState();
 
-  // useSelector((state) => console.log(state));
-
-  // const OnFileUpload = (e) => {
-  //     console.log(e.target.files[0].name);
-  //     const str = `${e.target.files[0].name} modified at ${
-  //       new Date(e.target.files[0].lastModified).toLocaleTimeString
-  //     }`;
-  //     this.setState({
-  //       dateStr: str,
-  //     });
-
-  //     console.log(str);
-  //   };
+  // const AddMovieState = useSelector((state) => state.AddMovieState);
 
   const uploadFile = async (e) => {
     try {
@@ -52,7 +36,6 @@ function AddMovie() {
           }
         );
         console.log(res);
-        //console.log(res.data.token);
 
         if (res.data.success) {
           setError(res.data.message);
@@ -76,6 +59,7 @@ function AddMovie() {
     }
   };
 
+  //Create API (movie)
   const addMovie = async () => {
     try {
       setError("");
@@ -95,6 +79,7 @@ function AddMovie() {
             },
           }
         );
+        console.log("from addMovie", res);
         if (res.data.success) {
           setError(res.data.message);
         } else {
@@ -155,9 +140,12 @@ function AddMovie() {
                 setGenre(e.target.value);
               }}
             >
-              <option value="Comedy">Comedy</option>
+              <option value="select">Select</option>
+              <option value="Thriller">Thriller</option>
               <option value="Action">Action</option>
               <option value="Romantic">Romantic</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Drama">Drama</option>
             </select>
           </div>
           <div className="form-group-signin">

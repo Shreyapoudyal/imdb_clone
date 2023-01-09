@@ -1,30 +1,54 @@
-// import React, { useState } from "react";
-// import { Rating } from "react-simple-star-rating";
+// import React, { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import axios from "axios";
 
-// export default function Rating() {
-//   const [rating, setRating] = useState(0);
+// function MovieRating({ movieId }) {
+//   const dispatch = useDispatch();
+//   const rating = useSelector((state) => state.movies[movieId].rating);
 
-//   // Catch Rating value
-//   const handleRating = (rate) => {
-//     setRating(rate);
+//   useEffect(() => {
+//     // Fetch the current rating for the movie from the API
+//     axios.get(`/api/movies/${movieId}/rating`).then((response) => {
+//       dispatch({
+//         type: "SET_MOVIE_RATING",
+//         payload: {
+//           movieId: movieId,
+//           rating: response.data.rating,
+//         },
+//       });
+//     });
+//   }, []);
 
-//     // other logic
+//   const handleRatingSubmit = (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(event.target);
+//     const rating = formData.get("rating");
+
+//     // Submit the new rating for the movie to the API
+//     axios
+//       .post(`/api/movies/${movieId}/rating`, {
+//         rating: rating,
+//       })
+//       .then((response) => {
+//         dispatch({
+//           type: "SET_MOVIE_RATING",
+//           payload: {
+//             movieId: movieId,
+//             rating: response.data.rating,
+//           },
+//         });
+//       });
 //   };
-//   // Optinal callback functions
-//   const onPointerEnter = () => console.log("Enter");
-//   const onPointerLeave = () => console.log("Leave");
-//   const onPointerMove = (value, index) => console.log(value, index);
 
 //   return (
-//     <div className="App">
-//       <Rating
-//         onClick={handleRating}
-//         onPointerEnter={onPointerEnter}
-//         onPointerLeave={onPointerLeave}
-//         onPointerMove={onPointerMove}
-//         /* Available Props */
-//       />
-//       {console.log(rate)}
-//     </div>
+//     <form onSubmit={handleRatingSubmit}>
+//       <label>
+//         Rating:
+//         <input type="number" name="rating" min="0" max="10" />
+//       </label>
+//       <button type="submit">Submit</button>
+//     </form>
 //   );
 // }
+
+// export default MovieRating;
